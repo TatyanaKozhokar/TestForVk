@@ -20,12 +20,8 @@ public class WikiPageTest {
     @Test
     public void testAllSuggestionsContainTextAndHaveBoldText() {
         WikiPage wikiPage = new WikiPage(); //создаем оъект страницы
-        wikiPage.getSearchBar().click();    //нажимаем на поисковую строку
-        wikiPage.getSearchBar().setValue("Долл"); //Вводим Долл
-        wikiPage.getSuggestions()
-                .shouldBe(Condition.visible); //Проверяем что выпадающий список виден
-        wikiPage.getSearchClue("Долл") //Проверяем что внизу списка есть подсказка "Поиск страниц содержащих значение"
-                .shouldBe(Condition.visible);
+        wikiPage.clickOnSearchBarAndSetValue("Долл"); //Проверяем что выпадающий список виден
+        wikiPage.checkTheClue("Долл");
         wikiPage.getHighlight()
                 .shouldBe(CollectionCondition.allMatch( //Проверяем что все совпадающие значения выделены жирным
                         "Все совпадения выделены жирным",
@@ -40,12 +36,8 @@ public class WikiPageTest {
     @Test
     public void testRelevantOptions(){
         WikiPage wikiPage = new WikiPage(); //создаем объект страницы
-        wikiPage.getSearchBar().click(); //нажимаем на поисковую строку
-        wikiPage.getSearchBar().setValue("КисКи"); //Вводим значение, на которое движок может предложить похожее
-        wikiPage.getSuggestions()
-                .shouldBe(Condition.visible); //Смотрим что выпал список
-        wikiPage.getSearchClue("КисКи") //Проверяем что внизу списка есть подсказка "Поиск страниц содержащих значение"
-                .shouldBe(Condition.visible);
+        wikiPage.clickOnSearchBarAndSetValue("КисКи"); //Вводим значение, на которое движок может предложить похожее
+        wikiPage.checkTheClue("КисКи");
 
         assertThat("Тест невозможно автоматизировать, так как неизвестен алгоритм выдачи релевантных вариантов", 2, equalTo(42));
     }

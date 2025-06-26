@@ -41,15 +41,11 @@ public class WikiPageLinkBySearchedTextTest {
     @Test
     public void testLinkBySearchedText(){
         WikiPage wikiPage = new WikiPage(); //создаем объект страницы
-        wikiPage.getSearchBar().click(); //нажимаем на строку поиска
-        wikiPage.getSearchBar().setValue(searchedText); //Вводим текст
-        wikiPage.getSuggestions()
-                .shouldBe(Condition.visible); //Проверяем что виден выпадающий список
-        wikiPage.getSearchClue(searchedText) //Проверяем что внизу списка есть подсказка Поиск страниц содержащих значение
-                .shouldBe(Condition.visible);
+        wikiPage.clickOnSearchBarAndSetValue(searchedText); //Вводим текст
+        wikiPage.getSearchClue(searchedText);//Проверяем что внизу списка есть подсказка Поиск страниц содержащих значение;
 
         wikiPage.getClickOnSearchedWord(clickedTest).click(); //нажимаем на один из предлагаемых вариантов
-        Selenide.webdriver().shouldHave(WebDriverConditions.url(link)); //Проверяем что открылась нужная ссылка
+        wikiPage.checkTheLink(link); //Проверяем что открылась нужная ссылка
 
     }
 }

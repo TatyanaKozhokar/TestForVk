@@ -37,15 +37,11 @@ public class WikiPageSearchByMagnifierTest {
     @Test
     public void testLinkWithMagnifier(){
         WikiPage wikiPage = new WikiPage(); //создаем оъект страницы
-        wikiPage.getSearchBar().click(); //нажимаем на поисковую строку
-        wikiPage.getSearchBar().setValue(searchedText); //Ищем текст
-        wikiPage.getSuggestions()
-                .shouldBe(Condition.visible); //Проверяем что выпадающий список виден
-        wikiPage.getSearchClue(searchedText) //Проверяем что внизу списка есть подсказка "Поиск страниц содержащих значение"
-                .shouldBe(Condition.visible);
+        wikiPage.clickOnSearchBarAndSetValue(searchedText); //Проверяем что выпадающий список виден
+        wikiPage.checkTheClue(searchedText);
 
         wikiPage.getMagnifier().click(); //Нажимаем на лупу
-        Selenide.webdriver().shouldHave(WebDriverConditions.url(link)); //Проверяем что открылась нужная ссылка
+        wikiPage.checkTheLink(link); //Проверяем что открылась нужная ссылка
 
     }
 }

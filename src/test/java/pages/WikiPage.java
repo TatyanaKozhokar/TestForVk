@@ -1,7 +1,7 @@
 package pages;
 
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.*;
+import io.qameta.allure.Step;
 import jdk.jfr.Name;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -51,6 +51,25 @@ public class WikiPage {
     @Name("Локатор подсказки Поиск страниц содержащих значение")
     public SelenideElement getSearchClue(String searchText){
         return $x("//div[@class='special-query' and text()='" + searchText + "']");
+    }
+
+    @Step("Ввод значения в поисковую строку")
+    public void clickOnSearchBarAndSetValue(String data){
+        getSearchBar().click(); //Нажимаем на поисковую строку
+        getSearchBar().setValue(data); //Вводим значение
+        getSuggestions()
+                .shouldBe(Condition.visible); //Проверяем наличие выпадающего списка
+    }
+
+    @Step("Проверка наличия подсказки внизу выпадающего списка")
+    public void checkTheClue(String data){
+        getSearchClue(data) //Проверяем что внизу списка есть подсказка "Поиск страниц содержащих значение"
+                .shouldBe(Condition.visible);
+    }
+
+    @Step("Проверка ссылки")
+    public void checkTheLink(String data){
+        Selenide.webdriver().shouldHave(WebDriverConditions.url(data));
     }
 
 }
