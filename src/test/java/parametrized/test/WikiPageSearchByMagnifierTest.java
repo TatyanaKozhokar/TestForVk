@@ -10,6 +10,7 @@ import org.junit.runners.Parameterized;
 
 @RunWith(Parameterized.class)
 public class WikiPageSearchByMagnifierTest {
+    WikiPage wikiPage;
     public String searchedText;
     public String link;
 
@@ -26,7 +27,7 @@ public class WikiPageSearchByMagnifierTest {
     }
     @Before
     public void setUp() {
-        WikiPage wikiPage = new WikiPage();
+        wikiPage = new WikiPage();
         Selenide.open(wikiPage.getSetUpUrl());
     }
 
@@ -34,7 +35,6 @@ public class WikiPageSearchByMagnifierTest {
     @DisplayName("Проверка что переход по нажатию лупы ведет к первому сайджесту")
     @Test
     public void testLinkWithMagnifier(){
-        WikiPage wikiPage = new WikiPage(); //создаем оъект страницы
         wikiPage.clickOnSearchBarAndSetValue(searchedText); //Проверяем что выпадающий список виден
         wikiPage.checkTheClue(searchedText);
 

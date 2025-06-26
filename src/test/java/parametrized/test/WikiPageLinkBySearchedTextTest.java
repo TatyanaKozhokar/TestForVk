@@ -10,6 +10,7 @@ import org.junit.runners.Parameterized;
 
 @RunWith(Parameterized.class)
 public class WikiPageLinkBySearchedTextTest {
+    WikiPage wikiPage;
 
     public WikiPageLinkBySearchedTextTest(String searchedText, String clickedTest, String link) {
         this.searchedText = searchedText;
@@ -31,14 +32,13 @@ public class WikiPageLinkBySearchedTextTest {
 
     @Before
     public void setUp() {
-        WikiPage wikiPage = new WikiPage();
+        wikiPage = new WikiPage();
         Selenide.open(wikiPage.getSetUpUrl());
     }
 
     @DisplayName("Проверка что при клике на текст происходит переход на его точную страницу")
     @Test
     public void testLinkBySearchedText(){
-        WikiPage wikiPage = new WikiPage(); //создаем объект страницы
         wikiPage.clickOnSearchBarAndSetValue(searchedText); //Вводим текст
         wikiPage.getSearchClue(searchedText);//Проверяем что внизу списка есть подсказка Поиск страниц содержащих значение;
 

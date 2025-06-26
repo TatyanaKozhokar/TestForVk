@@ -10,16 +10,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class WikiPageTest {
-
+    WikiPage wikiPage;
     @Before
     public void setUp() {
-        WikiPage wikiPage = new WikiPage();
+        wikiPage = new WikiPage();
         open(wikiPage.getSetUpUrl());
     }
     @DisplayName("Проверка что все элементы выпадающего списка содержат введенное значение выделенное жирным")
     @Test
     public void testAllSuggestionsContainTextAndHaveBoldText() {
-        WikiPage wikiPage = new WikiPage(); //создаем оъект страницы
         wikiPage.clickOnSearchBarAndSetValue("Долл"); //Проверяем что выпадающий список виден
         wikiPage.checkTheClue("Долл");
         wikiPage.getHighlight()
@@ -34,8 +33,7 @@ public class WikiPageTest {
 
     @DisplayName("Проверка что движок предложит релевантные варианты при их наличии")
     @Test
-    public void testRelevantOptions(){
-        WikiPage wikiPage = new WikiPage(); //создаем объект страницы
+    public void testRelevantOptions(){//создаем объект страницы
         wikiPage.clickOnSearchBarAndSetValue("КисКи"); //Вводим значение, на которое движок может предложить похожее
         wikiPage.checkTheClue("КисКи");
 
