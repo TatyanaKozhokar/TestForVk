@@ -1,9 +1,7 @@
 package parametrized.test;
 
 import pages.WikiPage;
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.WebDriverConditions;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Before;
 import org.junit.Test;
